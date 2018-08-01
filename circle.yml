@@ -1,0 +1,30 @@
+save_cache: &save_cache
+  save_cache:
+    paths:
+      - node_modules
+    key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    branches:
+      ignore:
+        - gh-pages # list of branches to ignore
+        - /release\/.*/ # or ignore regexes
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: install dependences
+          command: yarn
+      - *save_cache
+      - run:
+          name: build
+          command: yarn build
+      # - run:
+      #     name: deploy
+      #     command: ./node_modules/.bin/netlify deploy -t $NETLIFY_TOKEN
