@@ -164,7 +164,53 @@
   "len": 100
 }
 ```
+#### Response
 
+| Field     | Value/Explanation                                                          |
+| --------- | -------------------------------------------------------------------------- |
+| MsgType   | SubOrderBookResponse                                                 |
+| Symbol    | trading pair (eg: 'BTC_USD')                                         |
+| Data.Asks | Asks array[0] is price， array[1] = volume                            |
+| Data.Bids | Bids array[0] is price， array[1] = volume                            |
+| Timestamp |   |
+
+```json
+{
+    "MsgType":"OrderBook.BTC_USD.10",
+    "Symbol":"BTC_USD",
+    "Data":{
+        "Asks":[
+            [
+                7458.8,
+                0.0974
+            ],
+            [
+                7459,
+                0.0054
+            ],
+            [
+                7459.4,
+                0.0494
+            ]
+        ],
+        "Bids":[
+            [
+                7458.7,
+                0.0001
+            ],
+            [
+                7458.3,
+                0.0003
+            ],
+            [
+                7457.4,
+                0.0001
+            ]
+        ]
+    },
+    "Timestamp":1533106907345
+}
+```
 ### UnSubOrderBook
 
 取消订阅特定频道 档位的 `orderbook`,
